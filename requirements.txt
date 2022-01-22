@@ -1,0 +1,7 @@
+torch==1.7.1
+torchvision==0.8.2
+fastai==1.0.60
+lmdb
+pillow
+opencv-python
+tensorboardX

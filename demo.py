@@ -68,6 +68,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--config', type=str, default='configs/train_matrn.yaml',
                         help='path to config file')
+    parser.add_argument('--name', type=str, default=None)
     parser.add_argument('--input', type=str, default='figs/test')
     parser.add_argument('--cuda', type=int, default=-1)
     parser.add_argument('--checkpoint', type=str, default='workdir/train-matrn/best-train-matrn.pth')
@@ -75,8 +76,12 @@ def main():
                         choices=['alignment', 'vision', 'language'])
     args = parser.parse_args()
     config = Config(args.config)
+    if args.name is not None: config.global_name = args.name
     if args.checkpoint is not None: config.model_checkpoint = args.checkpoint
     if args.model_eval is not None: config.model_eval = args.model_eval
+    config.global_workdir = os.path.join(config.global_workdir, config.global_name)
+    save_root = '.'
+    config.global_workdir = os.path.join(save_root, config.global_workdir)
     config.global_phase = 'test'
     config.model_vision_checkpoint, config.model_language_checkpoint = None, None
     device = 'cpu' if args.cuda < 0 else f'cuda:{args.cuda}'
@@ -101,7 +106,7 @@ def main():
         img = PIL.Image.open(path).convert('RGB')
         img = preprocess(img, config.dataset_image_width, config.dataset_image_height)
         img = img.to(device)
-        res = model(img)
+        res = model(img, None)
         pt_text, _, __ = postprocess(res, charset, config.model_eval)
         logging.info(f'{path}: {pt_text[0]}')
 

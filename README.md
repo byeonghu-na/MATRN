@@ -66,7 +66,7 @@ pip install torch==1.7.1 torchvision==0.8.2 fastai==1.0.60 lmdb pillow opencv-py
 |-|-|-|-|-|-|-|-|-|
 |MATRN|96.7|94.9|97.9|95.8|86.6|82.9|90.5|94.1|
 
-* If you want to train with pretrained visioan and language model, download pretrained model of vision and language model from [ABINet (for training and evaluation)](https://github.com/FangShancheng/ABINet#pretrained-models).
+* If you want to train with pretrained visioan and language model, download pretrained model of vision and language model from [ABINet](https://github.com/FangShancheng/ABINet#pretrained-models).
 
 
 ## Training and Evaluation

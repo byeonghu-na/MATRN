@@ -7,6 +7,7 @@ Official PyTorch implementation for Multi-modal Text Recognition Networks: Inter
 
 This paper introduces a novel method, called Multi-modAl Text Recognition Network (MATRN), that enables interactions between visual and semantic features for better recognition performances.
 
+<img src="./figures/overview.png" width="1000" title="overview" alt="An overview of MATRN. A visual feature extractor and an LM extract visual and semantic features, respectively. By utilizing the attention map, representing relations between visual features and character positions, MATRNs encode spatial information into the semantic features and hide visual features related to a randomly selected character. Through the multi-modal feature enhancement module, visual and semantic features interact with each other and the enhanced features in two modalities are fused to finalize the output sequence.">
 
 ## Datasets
 

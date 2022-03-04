@@ -2,7 +2,7 @@ global:
   name: exp
   phase: train
   stage: pretrain-vision
-  workdir: /tmp/workdir
+  workdir: results
   seed: ~
  
 dataset:
@@ -21,6 +21,10 @@ dataset:
             'data/evaluation/IC15_1811',
             'data/evaluation/CUTE80'],
     batch_size: 128
+  }
+  valid: {
+    roots: [ 'data/validation' ],
+    batch_size: 384
   }
   charset_path: data/charset_36.txt
   num_workers: 4

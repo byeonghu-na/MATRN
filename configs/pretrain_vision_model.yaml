@@ -2,7 +2,7 @@ global:
   name: pretrain-vision-model
   phase: train
   stage: pretrain-vision
-  workdir: workdir
+    workdir: results
   seed: ~
  
 dataset:
@@ -20,6 +20,10 @@ dataset:
             'data/evaluation/IC13_857',
             'data/evaluation/IC15_1811',
             'data/evaluation/CUTE80'],
+    batch_size: 384
+  }
+  valid: {
+    roots: [ 'data/validation' ],
     batch_size: 384
   }
   data_aug: True

@@ -2,7 +2,7 @@ global:
   name: train-abinet-sv
   phase: train
   stage: train-super
-  workdir: workdir
+  workdir: results
   seed: ~
  
 dataset:
@@ -20,6 +20,10 @@ dataset:
             'data/evaluation/IC13_857',
             'data/evaluation/IC15_1811',
             'data/evaluation/CUTE80'],
+    batch_size: 384
+  }
+  valid: {
+    roots: [ 'data/validation' ],
     batch_size: 384
   }
   data_aug: True
@@ -53,14 +57,14 @@ model:
   ensemble: ''
   use_vision: False
   vision: {
-    checkpoint: workdir/pretrain-vision-model-sv/best-pretrain-vision-model-sv.pth,
+    checkpoint: 'results/pretrain/pretrain-vision-model/best-pretrain-vision-model.pth',
     loss_weight: 1.,
     attention: 'attention',
     backbone: 'transformer',
     backbone_ln: 2,
   }
   language: {
-    checkpoint:  workdir/pretrain-language-model/pretrain-language-model.pth,
+    checkpoint:  'results/pretrain/pretrain-language-model/pretrain-language-model.pth',
     num_layers: 4,
     loss_weight: 1.,
     detach: True,

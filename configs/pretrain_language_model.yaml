@@ -2,7 +2,7 @@ global:
   name: pretrain-language-model
   phase: train
   stage: pretrain-language
-  workdir: workdir
+  workdir: results
   seed: ~
  
 dataset:
@@ -13,6 +13,10 @@ dataset:
   test: {
     roots: ['data/WikiText-103_eval_d1.csv'],
     batch_size: 4096
+  }
+  valid: {
+    roots: [ 'data/validation' ],
+    batch_size: 384
   }
 
 training:

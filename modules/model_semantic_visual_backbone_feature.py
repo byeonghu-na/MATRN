@@ -92,7 +92,7 @@ class BaseSemanticVisual_backbone_feature(Model):
         l_feature = l_feature + base_pos
 
         sv_feature = torch.cat((v_feature, l_feature), dim=0)  # (H*W+T, N, E)
-        sv_feature = self.model(sv_feature)  # (H*W+T, N, E)
+        sv_feature = self.model1(sv_feature)  # (H*W+T, N, E)
 
         sv_to_v_feature = sv_feature[:H*W]  # (H*W, N, E)
         sv_to_s_feature = sv_feature[H*W:]  # (T, N, E)

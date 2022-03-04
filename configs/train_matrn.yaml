@@ -1,5 +1,5 @@
 global:
-  name: train-martrn
+  name: train-matrn
   phase: train
   stage: train-super
   workdir: results

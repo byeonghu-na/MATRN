@@ -34,7 +34,7 @@ class BaseSemanticVisual_backbone_feature(Model):
 
         encoder_layer = TransformerEncoderLayer(d_model=d_model, nhead=nhead,
                                                 dim_feedforward=d_inner, dropout=dropout, activation=activation)
-        self.model = TransformerEncoder(encoder_layer, num_layers)
+        self.model1 = TransformerEncoder(encoder_layer, num_layers)
         self.pos_encoder_tfm = PositionalEncoding(d_model, dropout=0, max_len=8*32)
 
         mode = ifnone(config.model_alignment_attention_mode, 'nearest')

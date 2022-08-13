@@ -96,10 +96,10 @@ This implementation has been based on [ABINet](https://github.com/FangShancheng/
 ## Citation
 Please cite this work in your publications if it helps your research.
 ```bash 
-@article{na2021multi,
+@inproceedings{na2022multi,
   title={Multi-modal Text Recognition Networks: Interactive Enhancements between Visual and Semantic Features},
   author={Na, Byeonghu and Kim, Yoonsik and Park, Sungrae},
-  journal={arXiv preprint arXiv:2111.15263},
-  year={2021}
+  booktitle={Proceedings of the European Conference on Computer Vision (ECCV)},
+  year={2022}
 }
  ```

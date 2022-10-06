@@ -1,9 +1,11 @@
-# Multi-modal Text Recognition Networks: Interactive Enhancements between Visual and Semantic Features
+# Multi-modal Text Recognition Networks: Interactive Enhancements between Visual and Semantic Features (ECCV 2022)
 
 | [paper](https://arxiv.org/pdf/2111.15263) |
 
 
-Official PyTorch implementation for Multi-modal Text Recognition Networks: Interactive Enhancements between Visual and Semantic Features (MATRN).
+Official PyTorch implementation for Multi-modal Text Recognition Networks: Interactive Enhancements between Visual and Semantic Features (MATRN) in [ECCV 2022](https://eccv2022.ecva.net/).
+
+**[Byeonghu Na](https://github.com/wp03052), [Yoonsik Kim](https://github.com/terryoo), and [Sungrae Park](https://github.com/sungraepark)**
 
 This paper introduces a novel method, called Multi-modAl Text Recognition Network (MATRN), that enables interactions between visual and semantic features for better recognition performances.
 
@@ -94,10 +96,10 @@ This implementation has been based on [ABINet](https://github.com/FangShancheng/
 ## Citation
 Please cite this work in your publications if it helps your research.
 ```bash 
-@article{na2021multi,
+@inproceedings{na2022multi,
   title={Multi-modal Text Recognition Networks: Interactive Enhancements between Visual and Semantic Features},
   author={Na, Byeonghu and Kim, Yoonsik and Park, Sungrae},
-  journal={arXiv preprint arXiv:2111.15263},
-  year={2021}
+  booktitle={Proceedings of the European Conference on Computer Vision (ECCV)},
+  year={2022}
 }
  ```

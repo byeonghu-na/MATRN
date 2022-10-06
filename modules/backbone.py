@@ -34,3 +34,20 @@ class ResTranformer(nn.Module):
         feature = self.transformer(feature)
         feature = feature.permute(1, 2, 0).view(n, c, h, w)
         return feature
+
+
+class ResNetWithPosEnc(nn.Module):
+    def __init__(self, config):
+        super().__init__()
+        self.resnet = resnet45()
+
+        self.d_model = ifnone(config.model_vision_d_model, _default_tfmer_cfg['d_model'])
+        self.pos_encoder = PositionalEncoding(self.d_model, max_len=8*32)
+
+    def forward(self, images):
+        feature = self.resnet(images)
+        n, c, h, w = feature.shape
+        feature = feature.view(n, c, -1).permute(2, 0, 1)
+        feature = self.pos_encoder(feature)
+        feature = feature.permute(1, 2, 0).view(n, c, h, w)
+        return feature

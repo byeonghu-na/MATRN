@@ -3,9 +3,8 @@ import torch.nn as nn
 from fastai.vision import *
 
 from modules.attention import *
-from modules.backbone import ResTranformer
+from modules.backbone import ResTranformer, ResNetWithPosEnc
 from modules.model import Model
-from modules.resnet import resnet45
 
 
 class BaseVision(Model):
@@ -18,7 +17,7 @@ class BaseVision(Model):
 
         if config.model_vision_backbone == 'transformer':
             self.backbone = ResTranformer(config)
-        else: self.backbone = resnet45()
+        else: self.backbone = ResNetWithPosEnc(config)
         
         if config.model_vision_attention == 'position':
             mode = ifnone(config.model_vision_attention_mode, 'nearest')

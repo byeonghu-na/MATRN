@@ -58,7 +58,7 @@ The datasets can be downloaded in [clova (for validation and evaluation)](https:
 ## Requirements
 
 ```
-pip install torch==1.7.1 torchvision==0.8.2 fastai==1.0.60 lmdb pillow opencv-python
+pip install torch==1.7.1 torchvision==0.8.2 fastai==1.0.60 lmdb pillow opencv-python tensorboardX editdistance
 ```
 
 ### Pretrained Models

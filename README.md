@@ -97,9 +97,11 @@ This implementation has been based on [ABINet](https://github.com/FangShancheng/
 Please cite this work in your publications if it helps your research.
 ```bash 
 @inproceedings{na2022multi,
-  title={Multi-modal Text Recognition Networks: Interactive Enhancements between Visual and Semantic Features},
-  author={Na, Byeonghu and Kim, Yoonsik and Park, Sungrae},
-  booktitle={Proceedings of the European Conference on Computer Vision (ECCV)},
-  year={2022}
+ title={Multi-modal text recognition networks: Interactive enhancements between visual and semantic features},
+ author={Na, Byeonghu and Kim, Yoonsik and Park, Sungrae},
+ booktitle={European Conference on Computer Vision},
+ pages={446--463},
+ year={2022},
+ organization={Springer}
 }
  ```

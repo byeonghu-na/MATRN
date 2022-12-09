@@ -26,6 +26,7 @@ def _set_random_seed(seed):
 def _get_training_phases(config, n):
     lr = np.array(config.optimizer_lr)
     periods = config.optimizer_scheduler_periods
+    assert sum(periods) == config.training_epochs
     sigma = [config.optimizer_scheduler_gamma ** i for i in range(len(periods))]
     phases = [TrainingPhase(n * periods[i]).schedule_hp('lr', lr * sigma[i])
                 for i in range(len(periods))]

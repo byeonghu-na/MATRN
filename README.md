@@ -63,7 +63,7 @@ pip install torch==1.7.1 torchvision==0.8.2 fastai==1.0.60 lmdb pillow opencv-py
 
 ### Pretrained Models
 
-* Download pretrained model of MATRN from this [link](https://www.dropbox.com/s/pjcarm73cqwbxh4/best-train-matrn.pth?dl=0). Performances of the pretrained models are:
+* Download pretrained model of MATRN from this [link](https://www.dropbox.com/s/pjcarm73cqwbxh4/best-train-matrn.pth?dl=0). Performances of the pretrained model are:
 
 |Model|IIIT|SVT|IC13<sub>S</sub>|IC13<sub>L</sub>|IC15<sub>S</sub>|IC15<sub>L</sub>|SVTP|CUTE|
 |-|-|-|-|-|-|-|-|-|

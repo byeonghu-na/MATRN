@@ -5,3 +5,4 @@ lmdb
 pillow
 opencv-python
 tensorboardX
+editdistance

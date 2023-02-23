@@ -17,13 +17,14 @@ from utils import CharsetMapper, Timer, blend_mask
 
 class IterationCallback(LearnerTensorboardWriter):
     "A `TrackerCallback` that monitor in each iteration."
-    def __init__(self, learn:Learner, name:str='model', checpoint_keep_num=5,
+    def __init__(self, learn:Learner, name:str='model', stage:str='train-super', checpoint_keep_num=5,
                  show_iters:int=50, eval_iters:int=1000, save_iters:int=20000,
                  start_iters:int=0, stats_iters=20000):
         #if self.learn.rank is not None: time.sleep(self.learn.rank)  # keep all event files
         super().__init__(learn, base_dir='.', name=learn.path, loss_iters=show_iters, 
                         stats_iters=stats_iters, hist_iters=stats_iters)
         self.name, self.bestname = Path(name).name, f'best-{Path(name).name}'
+        self.stage = stage
         self.bestname_valid = f'best-valid-{Path(name).name}'
         self.show_iters = show_iters
         self.eval_iters = eval_iters
@@ -120,7 +121,7 @@ class IterationCallback(LearnerTensorboardWriter):
 
         if iteration % self.eval_iters == 0:
             # TODO: or remove time to on_epoch_end
-            # 1. Record time 
+            # 1. Record time
             log_str = f'average data time = {self.timer.average_data_time():.4f}s, ' \
                       f'average running time = {self.timer.average_running_time():.4f}s'
             logging.info(log_str)
@@ -137,15 +138,16 @@ class IterationCallback(LearnerTensorboardWriter):
             self._write_metrics(iteration, names, last_metrics)
 
             # 2-1. Call validate with our validate set
-            last_metrics_test = self._validate_test()
-            self.learn.model.train()
-            log_str = f'epoch {epoch} iter {iteration}: valid loss = {last_metrics_test[0]:6.4f},  ' \
-                      f'valid ccr = {last_metrics_test[1]:6.4f},  valid cwr = {last_metrics_test[2]:6.4f},  ' \
-                      f'valid ted = {last_metrics_test[3]:6.4f},  valid ned = {last_metrics_test[4]:6.4f},  ' \
-                      f'valid ted/w = {last_metrics_test[5]:6.4f}, '
-            logging.info(log_str)
-            names = ['valid_loss', 'valid_ccr', 'valid_cwr', 'valid_ted', 'valid_ned', 'valid_ted/w']
-            self._write_metrics(iteration, names, last_metrics_test)
+            if self.stage != 'pretrain-language':
+                last_metrics_test = self._validate_test()
+                self.learn.model.train()
+                log_str = f'epoch {epoch} iter {iteration}: valid loss = {last_metrics_test[0]:6.4f},  ' \
+                          f'valid ccr = {last_metrics_test[1]:6.4f},  valid cwr = {last_metrics_test[2]:6.4f},  ' \
+                          f'valid ted = {last_metrics_test[3]:6.4f},  valid ned = {last_metrics_test[4]:6.4f},  ' \
+                          f'valid ted/w = {last_metrics_test[5]:6.4f}, '
+                logging.info(log_str)
+                names = ['valid_loss', 'valid_ccr', 'valid_cwr', 'valid_ted', 'valid_ned', 'valid_ted/w']
+                self._write_metrics(iteration, names, last_metrics_test)
 
             # 3. Save best model
             current = last_metrics[2]
@@ -156,12 +158,13 @@ class IterationCallback(LearnerTensorboardWriter):
                 self._save(f'{self.bestname}')
 
             # 3-1. Save best model (valid)
-            current_valid = last_metrics_test[2]
-            if current_valid is not None and current_valid > self.best_valid:
-                logging.info(f'Better model found at epoch {epoch} for valid, '\
-                             f'iter {iteration} with accuracy value: {current_valid:6.4f}.')
-                self.best_valid = current_valid
-                self._save(f'{self.bestname_valid}')
+            if self.stage != 'pretrain-language':
+                current_valid = last_metrics_test[2]
+                if current_valid is not None and current_valid > self.best_valid:
+                    logging.info(f'Better model found at epoch {epoch} for valid, '\
+                                 f'iter {iteration} with accuracy value: {current_valid:6.4f}.')
+                    self.best_valid = current_valid
+                    self._save(f'{self.bestname_valid}')
 
         if iteration % self.save_iters == 0 and self.host:
             logging.info(f'Save model {self.name}_{epoch}_{iteration}')

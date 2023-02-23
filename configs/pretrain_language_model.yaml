@@ -14,15 +14,11 @@ dataset:
     roots: ['data/WikiText-103_eval_d1.csv'],
     batch_size: 4096
   }
-  valid: {
-    roots: [ 'data/validation' ],
-    batch_size: 384
-  }
 
 training:
   epochs: 80
   show_iters: 50
-  eval_iters: 6000
+  eval_iters: 10
   save_iters: 3000
 
 optimizer:

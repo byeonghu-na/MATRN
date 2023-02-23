@@ -143,7 +143,7 @@ def _get_learner(config, data, model, local_rank=None):
         learner.callback_fns += [
             partial(GeneralScheduler, phases=phases),
             partial(GradientClipping, clip=config.optimizer_clip_grad),
-            partial(IterationCallback, name=config.global_name,
+            partial(IterationCallback, name=config.global_name, stage=config.global_stage,
                     show_iters=config.training_show_iters,
                     eval_iters=config.training_eval_iters,
                     save_iters=config.training_save_iters,

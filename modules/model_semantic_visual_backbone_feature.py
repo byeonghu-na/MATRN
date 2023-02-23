@@ -35,12 +35,14 @@ class BaseSemanticVisual_backbone_feature(Model):
         encoder_layer = TransformerEncoderLayer(d_model=d_model, nhead=nhead,
                                                 dim_feedforward=d_inner, dropout=dropout, activation=activation)
         self.model1 = TransformerEncoder(encoder_layer, num_layers)
-        self.pos_encoder_tfm = PositionalEncoding(d_model, dropout=0, max_len=8*32)
+        self.pos_encoder_tfm = PositionalEncoding(d_model, dropout=0, max_len=(config.dataset_image_height//4)*(config.dataset_image_width//4))
 
         mode = ifnone(config.model_alignment_attention_mode, 'nearest')
         self.model2_vis = PositionAttention(
             max_length=config.dataset_max_length + 1,  # additional stop token
-            mode=mode
+            mode=mode,
+            h=config.dataset_image_height // 4,
+            w=config.dataset_image_width // 4,
         )
         self.cls_vis = nn.Linear(d_model, self.charset.num_classes)
         self.cls_sem = nn.Linear(d_model, self.charset.num_classes)

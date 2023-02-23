@@ -24,11 +24,13 @@ class BaseVision(Model):
             self.attention = PositionAttention(
                 max_length=config.dataset_max_length + 1,  # additional stop token
                 mode=mode,
+                h=config.dataset_image_height // 4,
+                w=config.dataset_image_width // 4,
             )
         elif config.model_vision_attention == 'attention':
             self.attention = Attention(
                 max_length=config.dataset_max_length + 1,  # additional stop token
-                n_feature=8*32,
+                n_feature=(config.dataset_image_height // 4)*(config.dataset_image_width // 4),
             )
         else:
             raise Exception(f'{config.model_vision_attention} is not valid.')
@@ -44,6 +46,8 @@ class BaseVision(Model):
                 PositionAttention(
                     max_length=config.dataset_max_length + 1,  # additional stop token
                     mode=mode,
+                    h=config.dataset_image_height // 4,
+                    w=config.dataset_image_width // 4,
                 ) for _ in range(self.num_more_attention)
             ])
 

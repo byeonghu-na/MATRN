@@ -21,7 +21,7 @@ class ResTranformer(nn.Module):
         activation = ifnone(config.model_vision_activation, _default_tfmer_cfg['activation'])
         num_layers = ifnone(config.model_vision_backbone_ln, 2)
 
-        self.pos_encoder = PositionalEncoding(self.d_model, max_len=8*32)
+        self.pos_encoder = PositionalEncoding(self.d_model, max_len=(config.dataset_image_height//4)*(config.dataset_image_width//4))
         encoder_layer = TransformerEncoderLayer(d_model=self.d_model, nhead=nhead, 
                 dim_feedforward=d_inner, dropout=dropout, activation=activation)
         self.transformer = TransformerEncoder(encoder_layer, num_layers)
@@ -42,7 +42,7 @@ class ResNetWithPosEnc(nn.Module):
         self.resnet = resnet45()
 
         self.d_model = ifnone(config.model_vision_d_model, _default_tfmer_cfg['d_model'])
-        self.pos_encoder = PositionalEncoding(self.d_model, max_len=8*32)
+        self.pos_encoder = PositionalEncoding(self.d_model, max_len=(config.dataset_image_height//4)*(config.dataset_image_width//4))
 
     def forward(self, images):
         feature = self.resnet(images)

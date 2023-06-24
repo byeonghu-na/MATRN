@@ -5,7 +5,7 @@
 
 Official PyTorch implementation for Multi-modal Text Recognition Networks: Interactive Enhancements between Visual and Semantic Features (MATRN) in [ECCV 2022](https://eccv2022.ecva.net/).
 
-**[Byeonghu Na](https://github.com/wp03052), [Yoonsik Kim](https://github.com/terryoo), and [Sungrae Park](https://github.com/sungraepark)**
+**[Byeonghu Na](https://github.com/byeonghu-na), [Yoonsik Kim](https://github.com/terryoo), and [Sungrae Park](https://github.com/sungraepark)**
 
 This paper introduces a novel method, called Multi-modAl Text Recognition Network (MATRN), that enables interactions between visual and semantic features for better recognition performances.
 
